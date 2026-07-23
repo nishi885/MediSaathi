@@ -10,18 +10,18 @@ const MISSED_GRACE_PERIOD_MINUTES = 10;
 const getMedications = asyncHandler(async (req, res) => {
   const medications = await Medication.find({ user: req.user.id }).sort({ createdAt: -1 });
 
-  // Get today’s start and end time
+  
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
 
   const tomorrowStart = new Date(todayStart);
   tomorrowStart.setDate(todayStart.getDate() + 1);
 
-  // Filter out medications already logged as taken today
+  
   const filteredMeds = medications.filter((med) => {
     if (!med.history || med.history.length === 0) return true;
 
-    // Check if there’s a "taken" entry within today
+    
     const takenToday = med.history.some((entry) => {
       const date = new Date(entry.date);
       return (
@@ -31,7 +31,7 @@ const getMedications = asyncHandler(async (req, res) => {
       );
     });
 
-    return !takenToday; // show only if NOT taken today
+    return !takenToday; 
   });
 
   res.status(200).json(medications);
@@ -227,7 +227,7 @@ const getAdherenceStats = asyncHandler(async (req, res) => {
   const now = new Date();
 
   medications.forEach((med) => {
-    // For each scheduled time in `med.times`, check if missed
+    
     if (med.times && med.times.length > 0) {
       med.times.forEach((time) => {
         const [hour, minute] = time.split(':').map(Number);
@@ -237,7 +237,7 @@ const getAdherenceStats = asyncHandler(async (req, res) => {
           doseTime.getTime() + MISSED_GRACE_PERIOD_MINUTES * 60 * 1000
         );
 
-        // Allow the user ten minutes after the scheduled time to log the dose.
+        
         const takenToday = med.history?.some((entry) => {
           const entryDate = new Date(entry.date);
           return (
@@ -272,7 +272,7 @@ const getAdherenceStats = asyncHandler(async (req, res) => {
       });
     }
 
-    // Count totals
+    
     med.history?.forEach((entry) => {
       if (entry.status === "taken") taken++;
       else if (entry.status === "missed") missed++;
