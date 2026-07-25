@@ -7,8 +7,7 @@ const smtpHost = process.env.SMTP_HOST;
 const smtpPort = Number(process.env.SMTP_PORT) || 587;
 const smtpUser = process.env.SMTP_USER;
 const _rawSmtpPass = process.env.SMTP_PASS || '';
-// If user provided a Gmail app password copied with spaces (displayed as groups),
-// remove spaces for Gmail accounts to avoid authentication failures.
+
 const smtpPass = smtpUser && smtpUser.endsWith('@gmail.com') ? _rawSmtpPass.replace(/\s+/g, '') : _rawSmtpPass;
 const fromEmail = process.env.EMAIL_FROM || smtpUser;
 
@@ -22,7 +21,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Verify transporter configuration at startup so failures are logged early.
+
 transporter.verify()
   .then(() => console.log('SMTP transporter verified'))
   .catch((err) => console.error('SMTP transporter verification failed:', err));
