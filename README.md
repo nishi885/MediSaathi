@@ -2,13 +2,7 @@
 
 MediSaathi is a full-stack medication management platform that helps users schedule medicines, track doses, review adherence, receive reminders, and discover nearby healthcare facilities.
 
-## Live Application
 
-- Frontend: https://medi-sigma-blush.vercel.app
-- Backend: https://medisaathi-k07b.onrender.com
-- Health check: https://medisaathi-k07b.onrender.com/api/health
-
-The free Render backend may take up to a minute to wake after inactivity.
 
 ## Features
 
