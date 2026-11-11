@@ -9,7 +9,7 @@ import cron from 'node-cron';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import medicationRoutes from './routes/medicationRoutes.js';
-import chatRoutes from './routes/chatRoutes.js';
+//import chatRoutes from './routes/chatRoutes.js';
 import communityRoutes from './routes/communityRoutes.js';
 import Medication from './models/Medication.js';
 import { sendReminderEmail } from './utils/emailService.js';
@@ -55,7 +55,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/medications', medicationRoutes);
-app.use('/api/chat', chatRoutes);
+//app.use('/api/chat', chatRoutes);
 app.use("/api/community", communityRoutes);
 
 const normalizeTime = (timeString) => {
